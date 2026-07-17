@@ -2,23 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rakt Veda</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rakt Veda - Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
             --primary: #ff4757;
             --primary-dark: #e84118;
-            --secondary: #2f3542;
             --accent: #70a1ff;
-            --light: #f1f2f6;
-            --dark: #1e272e;
-            --success: #2ed573;
-            --warning: #ffa502;
-            --danger: #ff6b81;
-            --glass: rgba(255, 255, 255, 0.15);
-            --glass-dark: rgba(0, 0, 0, 0.2);
         }
 
         * {
@@ -27,140 +19,172 @@
             box-sizing: border-box;
         }
 
-        body {
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
             font-family: 'Hind Siliguri', 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #2c3e50, #4ca1af);
-            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
             color: white;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 500px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        /* Glassmorphism Card */
-        .card {
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 20px;
-            border: 1px solid var(--glass);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2),
-                        0 5px 15px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            transition: all 0.3s ease;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        .app-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            padding: 1.5rem;
+            overflow-y: auto;
         }
 
+        .login-content {
+            width: 100%;
+            max-width: 420px;
+            padding: 0.5rem 0;
+        }
+
+        /* ===== HEADER ===== */
         .header {
             text-align: center;
-            padding: 2rem 1rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            z-index: -1;
-            animation: pulse 8s infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% { transform: translate(0, 0); }
-            50% { transform: translate(50px, 50px); }
-            100% { transform: translate(0, 0); }
+            margin-bottom: 1.8rem;
         }
 
         .header h1 {
-            color: white;
-            font-size: 2.2rem;
+            font-size: 2.8rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            position: relative;
-            display: inline-block;
+            color: white;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
         }
 
-        .header h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 2px;
+        .header h1 i {
+            color: var(--primary);
+            margin-right: 10px;
+            font-size: 2.4rem;
+        }
+
+        .header h1 span {
+            color: var(--primary);
         }
 
         .header p {
-            color: var(--light);
-            font-size: 1rem;
-            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+            margin-top: 4px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
         }
 
-        /* Form Styles */
-        .form-container {
-            padding: 1.5rem;
+        .header .divider {
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            margin: 12px auto 0;
+            border-radius: 2px;
         }
 
+        /* ===== FORM ===== */
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: white;
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group label i {
+            margin-right: 8px;
+            color: var(--primary);
+            width: 18px;
         }
 
         .form-control {
             width: 100%;
-            padding: 0.8rem 1.2rem;
+            padding: 0.7rem 1.2rem;
             border: none;
             border-radius: 30px;
-            font-size: 1rem;
-            background: rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.06);
             color: white;
             font-family: 'Hind Siliguri', sans-serif;
             transition: all 0.3s ease;
-            border: 1px solid transparent;
+            border: 1.5px solid rgba(255, 255, 255, 0.06);
         }
 
         .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.25);
         }
 
         .form-control:focus {
             outline: none;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.2);
+            box-shadow: 0 0 0 4px rgba(255, 71, 87, 0.1);
         }
 
-        /* Language Selector */
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.3);
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .password-toggle:hover {
+            color: white;
+        }
+
+        /* ===== LANGUAGE SELECTOR ===== */
         .language-selector {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .language-selector .label-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .language-selector .label-row label {
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+        }
+
+        .language-selector .label-row label i {
+            margin-right: 8px;
+            color: var(--primary);
+            width: 18px;
+        }
+
+        .language-selector .label-row .selected-lang {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.15rem 0.7rem;
+            border-radius: 12px;
         }
 
         .language-options {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 0.8rem;
+            gap: 0.5rem;
         }
 
         .language-option {
@@ -179,33 +203,42 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 0.2rem;
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
-            height: 100%;
+            font-size: 0.75rem;
+            border: 1.5px solid rgba(255, 255, 255, 0.04);
+            min-height: 52px;
+            color: rgba(255, 255, 255, 0.5);
         }
 
         .language-option label:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .language-option input:checked + label {
-            background: var(--primary);
-            box-shadow: 0 0 0 2px white;
+            background: rgba(255, 71, 87, 0.12);
+            border-color: var(--primary);
+            color: white;
         }
 
         .language-option i {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+            color: rgba(255, 255, 255, 0.3);
         }
 
-        /* Submit Button */
+        .language-option input:checked + label i {
+            color: var(--primary);
+        }
+
+        /* ===== BUTTON ===== */
         .submit-btn {
             width: 100%;
-            padding: 0.8rem;
+            padding: 0.75rem;
             background: var(--primary);
             color: white;
             border: none;
@@ -215,59 +248,91 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Hind Siliguri', sans-serif;
-            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+            box-shadow: 0 4px 25px rgba(255, 71, 87, 0.25);
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 10px;
+            margin-top: 0.2rem;
+            letter-spacing: 0.5px;
         }
 
         .submit-btn:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+            box-shadow: 0 8px 35px rgba(255, 71, 87, 0.35);
         }
 
-        .submit-btn i {
-            margin-right: 8px;
+        .submit-btn:active {
+            transform: translateY(0);
         }
 
-        /* Error Message */
+        /* ===== ERROR ===== */
         .error-message {
-            background: rgba(255, 107, 129, 0.2);
-            border-left: 4px solid var(--danger);
-            padding: 1rem;
-            border-radius: 0 12px 12px 0;
-            color: white;
+            background: rgba(255, 107, 129, 0.1);
+            border-left: 4px solid #ff6b81;
+            padding: 0.6rem 1rem;
+            border-radius: 0 10px 10px 0;
+            color: #ff6b81;
             margin-bottom: 1rem;
             display: none;
-            animation: shake 0.5s ease;
+            animation: shake 0.4s ease;
+            font-size: 0.85rem;
         }
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-5px); }
-            40%, 80% { transform: translateX(5px); }
+            25%, 75% { transform: translateX(-4px); }
+            50% { transform: translateX(4px); }
         }
 
         .error-message i {
             margin-right: 8px;
-            color: var(--danger);
         }
 
-        /* Floating Particles */
+        /* ===== FOOTER ===== */
+        .footer {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.4rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer a:hover {
+            color: var(--accent);
+        }
+
+        .footer a i {
+            font-size: 0.75rem;
+        }
+
+        /* ===== PARTICLES ===== */
         .particles {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
             overflow: hidden;
+            pointer-events: none;
         }
 
         .particle {
             position: absolute;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 50%;
             animation: float linear infinite;
         }
@@ -277,242 +342,347 @@
             100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 1.5rem;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-        }
-
-        .footer a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer a:hover {
-            color: var(--accent);
-        }
-
-        /* Password Toggle */
-        .password-wrapper {
-            position: relative;
-        }
-
-        .password-toggle {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: rgba(255, 255, 255, 0.6);
-            transition: color 0.3s;
-        }
-
-        .password-toggle:hover {
-            color: white;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 500px) {
+            .app-container {
                 padding: 1rem;
-                margin: 1rem auto;
             }
-            
+
+            .login-content {
+                max-width: 100%;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .header h1 i {
+                font-size: 1.8rem;
+            }
+
+            .header p {
+                font-size: 0.8rem;
+            }
+
+            .form-control {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .language-options {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.4rem;
+            }
+
+            .language-option label {
+                font-size: 0.7rem;
+                min-height: 44px;
+                padding: 0.3rem 0.2rem;
+                border-radius: 10px;
+            }
+
+            .language-option i {
+                font-size: 1rem;
+            }
+
+            .footer {
+                gap: 1.2rem;
+                flex-wrap: wrap;
+            }
+
+            .footer a {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .app-container {
+                padding: 0.8rem;
+            }
+
             .header h1 {
                 font-size: 1.8rem;
             }
-            
+
+            .header h1 i {
+                font-size: 1.5rem;
+            }
+
             .language-options {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .submit-btn {
+                font-size: 0.9rem;
+                padding: 0.65rem;
+            }
         }
 
-        @media (max-width: 480px) {
-            .language-options {
-                grid-template-columns: 1fr;
+        @media (max-height: 700px) {
+            .header {
+                margin-bottom: 1.2rem;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .form-group {
+                margin-bottom: 0.7rem;
+            }
+
+            .language-selector {
+                margin-bottom: 0.8rem;
+            }
+
+            .language-option label {
+                min-height: 42px;
+                padding: 0.3rem 0.2rem;
+            }
+
+            .footer {
+                margin-top: 1rem;
+                padding-top: 0.8rem;
+            }
+        }
+
+        @media (max-height: 600px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header h1 i {
+                font-size: 1.5rem;
+            }
+
+            .header p {
+                font-size: 0.75rem;
+            }
+
+            .header .divider {
+                margin-top: 8px;
+                width: 40px;
+            }
+
+            .form-control {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .language-option label {
+                min-height: 36px;
+                font-size: 0.65rem;
+            }
+
+            .language-option i {
+                font-size: 0.9rem;
+            }
+
+            .submit-btn {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            .footer a {
+                font-size: 0.7rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Floating Particles Background -->
+    <!-- ===== PARTICLES ===== -->
     <div class="particles" id="particles"></div>
 
-    <div class="container">
-        <div class="card">
+    <!-- ===== FULL SCREEN APP ===== -->
+    <div class="app-container">
+        <div class="login-content">
+
+            <!-- HEADER -->
             <div class="header">
-                <h1><i class=""></i>Rakt Veda</h1>
-                <p>Select your preferred language and login to continue</p>
+                <h1><i class="fas fa-flask"></i>Rakt <span>Veda</span></h1>
+                <p>Sign in to continue</p>
+                <div class="divider"></div>
             </div>
 
-            <div class="form-container">
-                <div id="errorMessage" class="error-message">
-                    <i class="fas fa-exclamation-triangle"></i> Invalid username or password
+            <!-- ERROR -->
+            <div id="errorMessage" class="error-message">
+                <i class="fas fa-exclamation-circle"></i> Invalid username or password
+            </div>
+
+            <!-- FORM -->
+            <form id="loginForm">
+
+                <!-- Username -->
+                <div class="form-group">
+                    <label for="username"><i class="fas fa-user"></i> Username</label>
+                    <input type="text" id="username" class="form-control" placeholder="Enter your username" required autofocus>
                 </div>
-                
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="username"><i class="fas fa-user"></i> Username</label>
-                        <input type="text" id="username" class="form-control" placeholder="Enter your username" required>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="password"><i class="fas fa-lock"></i> Password</label>
-                        <div class="password-wrapper">
-                            <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
-                            <i class="fas fa-eye password-toggle" id="togglePassword"></i>
-                        </div>
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                        <i class="fas fa-eye password-toggle" id="togglePassword"></i>
                     </div>
+                </div>
 
-                    <div class="form-group language-selector">
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <div class="label-row">
                         <label><i class="fas fa-language"></i> Select Language</label>
-                        <div class="language-options">
-                            <div class="language-option">
-                                <input type="radio" id="marathi" name="language" value="marathi">
-                                <label for="marathi">
-                                    <i class="fas fa-om"></i>
-                                    मराठी
-                                </label>
-                            </div>
-                            <div class="language-option">
-                                <input type="radio" id="axomiya" name="language" value="axomiya" checked>
-                                <label for="axomiya">
-                                    <i class="fas fa-praying-hands"></i>
-                                    অসমীয়া
-                                </label>
-                            </div>
-                            <div class="language-option">
-                                <input type="radio" id="punjabi" name="language" value="punjabi">
-                                <label for="punjabi">
-                                    <i class="fas fa-kaaba"></i>
-                                    ਪੰਜਾਬੀ
-                                </label>
-                            </div>
-                            <div class="language-option">
-                                <input type="radio" id="hindi" name="language" value="hindi">
-                                <label for="hindi">
-                                    <i class="fas fa-place-of-worship"></i>
-                                    हिन्दी
-                                </label>
-                            </div>
-                            <div class="language-option">
-                                <input type="radio" id="bangla" name="language" value="bangla">
-                                <label for="bangla">
-                                    <i class="fas fa-star-and-crescent"></i>
-                                    বাংলা
-                                </label>
-                            </div>
-                            <div class="language-option">
-                                <input type="radio" id="gujrati" name="language" value="gujrati">
-                                <label for="gujrati">
-                                    <i class="fas fa-yin-yang"></i>
-                                    ગુજરાતી
-                                </label>
-                            </div>
+                        <span class="selected-lang" id="selectedLangDisplay">অসমীয়া</span>
+                    </div>
+                    <div class="language-options">
+                        <div class="language-option">
+                            <input type="radio" id="hindi" name="language" value="hindi">
+                            <label for="hindi">
+                                <i class="fas fa-om"></i>
+                                हिन्दी
+                            </label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="marathi" name="language" value="marathi">
+                            <label for="marathi">
+                                <i class="fas fa-om"></i>
+                                मराठी
+                            </label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="bangla" name="language" value="bangla">
+                            <label for="bangla">
+                                <i class="fas fa-star-and-crescent"></i>
+                                বাংলা
+                            </label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="axomiya" name="language" value="axomiya" checked>
+                            <label for="axomiya">
+                                <i class="fas fa-praying-hands"></i>
+                                অসমীয়া
+                            </label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="gujrati" name="language" value="gujrati">
+                            <label for="gujrati">
+                                <i class="fas fa-yin-yang"></i>
+                                ગુજરાતી
+                            </label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="punjabi" name="language" value="punjabi">
+                            <label for="punjabi">
+                                <i class="fas fa-kaaba"></i>
+                                ਪੰਜਾਬੀ
+                            </label>
                         </div>
                     </div>
-
-                    <button type="submit" class="submit-btn">
-                        <i class="fas fa-sign-in-alt"></i> Login
-                    </button>
-                </form>
-
-                <div class="footer">
-                    <p>Don't have an account? <a href="#" id="registerLink">Register here</a></p>
-                    <p><a href="#" id="forgotPassword">Forgot password?</a></p>
                 </div>
+
+                <!-- Submit -->
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </form>
+
+            <!-- FOOTER -->
+            <div class="footer">
+                <a href="#" id="registerLink"><i class="fas fa-user-plus"></i> Register</a>
+                <a href="#" id="forgotPassword"><i class="fas fa-key"></i> Forgot password?</a>
             </div>
+
         </div>
     </div>
 
     <script>
-        // Create floating particles
+        // ===== PARTICLES =====
         function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 30;
-            
-            for (let i = 0; i < particleCount; i++) {
+            const container = document.getElementById('particles');
+            const count = 30;
+            for (let i = 0; i < count; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
-                
-                // Random properties
-                const size = Math.random() * 5 + 2;
-                const posX = Math.random() * 100;
-                const duration = Math.random() * 20 + 10;
-                const delay = Math.random() * 5;
-                
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${posX}%`;
-                particle.style.bottom = `-${size}px`;
-                particle.style.animationDuration = `${duration}s`;
-                particle.style.animationDelay = `${delay}s`;
-                particle.style.opacity = Math.random() * 0.5 + 0.1;
-                
-                particlesContainer.appendChild(particle);
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.bottom = '-' + size + 'px';
+                particle.style.animationDuration = (Math.random() * 18 + 12) + 's';
+                particle.style.animationDelay = (Math.random() * 6) + 's';
+                particle.style.opacity = Math.random() * 0.3 + 0.05;
+                container.appendChild(particle);
             }
         }
-        
-        // Password visibility toggle
+        window.onload = createParticles;
+
+        // ===== PASSWORD TOGGLE =====
         document.getElementById('togglePassword').addEventListener('click', function() {
-            const passwordInput = document.getElementById('password');
-            const icon = this;
-            
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
+            const pwd = document.getElementById('password');
+            if (pwd.type === 'password') {
+                pwd.type = 'text';
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
             } else {
-                passwordInput.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
+                pwd.type = 'password';
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
             }
         });
-        
-        // Handle form submission
+
+        // ===== LANGUAGE DISPLAY =====
+        const langNames = {
+            hindi: 'हिन्दी',
+            marathi: 'मराठी',
+            bangla: 'বাংলা',
+            axomiya: 'অসমীয়া',
+            gujrati: 'ગુજરાતી',
+            punjabi: 'ਪੰਜਾਬੀ'
+        };
+
+        document.querySelectorAll('input[name="language"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.getElementById('selectedLangDisplay').textContent = langNames[this.value] || this.value;
+            });
+        });
+
+        // ===== FORM SUBMIT =====
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const selectedLanguage = document.querySelector('input[name="language"]:checked').value;
-            const errorElement = document.getElementById('errorMessage');
-            
-            // Clear previous error
-            errorElement.style.display = 'none';
-            
-            // Hardcoded credentials check
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const selected = document.querySelector('input[name="language"]:checked');
+            const errorEl = document.getElementById('errorMessage');
+
+            errorEl.style.display = 'none';
+
+            if (!selected) {
+                errorEl.textContent = '⚠️ Please select a language.';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            const lang = selected.value;
+
             if (username === "Ronak@123" && password === "I_LOVE_PCU") {
-                // Show success animation before redirect
-                document.querySelector('.card').classList.add('success-animation');
-                setTimeout(() => {
-                    // Redirect to language-specific page
-                    window.location.href = `${selectedLanguage}.html`;
-                }, 1000);
+                window.location.href = lang + '.html';
             } else {
-                // Show error message
-                errorElement.style.display = 'block';
+                errorEl.style.display = 'block';
                 document.getElementById('password').value = '';
+                document.getElementById('password').focus();
             }
         });
 
-        // Register link handler
+        // ===== FOOTER LINKS =====
         document.getElementById('registerLink').addEventListener('click', function(e) {
             e.preventDefault();
-            alert('Registration functionality will be implemented soon!');
+            alert('📝 Registration coming soon!');
         });
 
-        // Forgot password handler
         document.getElementById('forgotPassword').addEventListener('click', function(e) {
             e.preventDefault();
-            alert('Password recovery functionality will be implemented soon!');
+            alert('🔑 Password recovery coming soon!');
         });
-
-        // Initialize particles
-        window.onload = createParticles;
     </script>
 </body>
 </html>
