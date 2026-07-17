@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rakt Veda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff4757;
+            --primary-dark: #e84118;
+            --secondary: #2f3542;
+            --accent: #70a1ff;
+            --light: #f1f2f6;
+            --dark: #1e272e;
+            --success: #2ed573;
+            --warning: #ffa502;
+            --danger: #ff6b81;
+            --glass: rgba(255, 255, 255, 0.15);
+            --glass-dark: rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #2c3e50, #4ca1af);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Glassmorphism Card */
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid var(--glass);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2),
+                        0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            padding: 2rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            z-index: -1;
+            animation: pulse 8s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(50px, 50px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+
+        .header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .header p {
+            color: var(--light);
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Form Styles */
+        .form-container {
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: 'Hind Siliguri', sans-serif;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-control:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.2);
+        }
+
+        /* Language Selector */
+        .language-selector {
+            margin-bottom: 1.5rem;
+        }
+
+        .language-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+        }
+
+        .language-option {
+            position: relative;
+        }
+
+        .language-option input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .language-option label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            height: 100%;
+        }
+
+        .language-option label:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .language-option input:checked + label {
+            background: var(--primary);
+            box-shadow: 0 0 0 2px white;
+        }
+
+        .language-option i {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Hind Siliguri', sans-serif;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+        }
+
+        .submit-btn i {
+            margin-right: 8px;
+        }
+
+        /* Error Message */
+        .error-message {
+            background: rgba(255, 107, 129, 0.2);
+            border-left: 4px solid var(--danger);
+            padding: 1rem;
+            border-radius: 0 12px 12px 0;
+            color: white;
+            margin-bottom: 1rem;
+            display: none;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+
+        .error-message i {
+            margin-right: 8px;
+            color: var(--danger);
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--accent);
+        }
+
+        /* Password Toggle */
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.6);
+            transition: color 0.3s;
+        }
+
+        .password-toggle:hover {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+                margin: 1rem auto;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .language-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .language-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Particles Background -->
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1><i class=""></i>Rakt Veda</h1>
+                <p>Select your preferred language and login to continue</p>
+            </div>
+
+            <div class="form-container">
+                <div id="errorMessage" class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i> Invalid username or password
+                </div>
+                
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username"><i class="fas fa-user"></i> Username</label>
+                        <input type="text" id="username" class="form-control" placeholder="Enter your username" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password"><i class="fas fa-lock"></i> Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                            <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group language-selector">
+                        <label><i class="fas fa-language"></i> Select Language</label>
+                        <div class="language-options">
+                            <div class="language-option">
+                                <input type="radio" id="marathi" name="language" value="marathi">
+                                <label for="marathi">
+                                    <i class="fas fa-om"></i>
+                                    मराठी
+                                </label>
+                            </div>
+                            <div class="language-option">
+                                <input type="radio" id="axomiya" name="language" value="axomiya" checked>
+                                <label for="axomiya">
+                                    <i class="fas fa-praying-hands"></i>
+                                    অসমীয়া
+                                </label>
+                            </div>
+                            <div class="language-option">
+                                <input type="radio" id="punjabi" name="language" value="punjabi">
+                                <label for="punjabi">
+                                    <i class="fas fa-kaaba"></i>
+                                    ਪੰਜਾਬੀ
+                                </label>
+                            </div>
+                            <div class="language-option">
+                                <input type="radio" id="hindi" name="language" value="hindi">
+                                <label for="hindi">
+                                    <i class="fas fa-place-of-worship"></i>
+                                    हिन्दी
+                                </label>
+                            </div>
+                            <div class="language-option">
+                                <input type="radio" id="bangla" name="language" value="bangla">
+                                <label for="bangla">
+                                    <i class="fas fa-star-and-crescent"></i>
+                                    বাংলা
+                                </label>
+                            </div>
+                            <div class="language-option">
+                                <input type="radio" id="gujrati" name="language" value="gujrati">
+                                <label for="gujrati">
+                                    <i class="fas fa-yin-yang"></i>
+                                    ગુજરાતી
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+
+                <div class="footer">
+                    <p>Don't have an account? <a href="#" id="registerLink">Register here</a></p>
+                    <p><a href="#" id="forgotPassword">Forgot password?</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random properties
+                const size = Math.random() * 5 + 2;
+                const posX = Math.random() * 100;
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.bottom = `-${size}px`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Password visibility toggle
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this;
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+        
+        // Handle form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const selectedLanguage = document.querySelector('input[name="language"]:checked').value;
+            const errorElement = document.getElementById('errorMessage');
+            
+            // Clear previous error
+            errorElement.style.display = 'none';
+            
+            // Hardcoded credentials check
+            if (username === "Ronak@123" && password === "I_LOVE_PCU") {
+                // Show success animation before redirect
+                document.querySelector('.card').classList.add('success-animation');
+                setTimeout(() => {
+                    // Redirect to language-specific page
+                    window.location.href = `${selectedLanguage}.html`;
+                }, 1000);
+            } else {
+                // Show error message
+                errorElement.style.display = 'block';
+                document.getElementById('password').value = '';
+            }
+        });
+
+        // Register link handler
+        document.getElementById('registerLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Registration functionality will be implemented soon!');
+        });
+
+        // Forgot password handler
+        document.getElementById('forgotPassword').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Password recovery functionality will be implemented soon!');
+        });
+
+        // Initialize particles
+        window.onload = createParticles;
+    </script>
+</body>
+</html>
