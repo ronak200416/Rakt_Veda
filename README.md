@@ -67,7 +67,8 @@ rakt-veda/
 
 1. **Clone the repository**
 
-git clone https://github.com/ronak200416/rakt-veda.git cd rakt-veda
+git clone https://github.com/ronak200416/rakt-veda.git
+cd rakt-veda
 
 2. Get a Groq API Key
 Visit the Groq Console
