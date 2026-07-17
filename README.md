@@ -65,15 +65,14 @@ rakt-veda/
 
 ### Installation
 
-1. **Clone the repository**
-
+1. Clone the repository:
 git clone https://github.com/ronak200416/rakt-veda.git
 cd rakt-veda
 
-2. Get a Groq API Key
-Visit the Groq Console
-Sign up for a free account
-Generate a new API key
+2. Get a Groq API Key:
+Visit the Groq Console.
+Sign up for a free account.
+Generate a new API key.
 
 3. Update the API Key
 Open the HTML files.
@@ -81,4 +80,4 @@ Find the following line:
   const API_KEY = 'your-api-key-here';
 Replace your-api-key-here with your actual Groq API key.
 
-4. Run the Application
+4. Run the Application.
